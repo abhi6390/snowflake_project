@@ -1,0 +1,17 @@
+sources:
+  - name: dnb
+    database: BANKING_DB2
+    schema: BANK_SCHEMA
+    description: source file to ref the raw tables from snowflake
+    tables:
+      - name: accounts_raw
+        description: raw accounts table from snowflake
+
+      - name: cards_raw
+        description: raw cards table from snowflake
+
+      - name: transactions_raw
+        description: raw transactions table from snowflake
+
+      - name: customers_raw
+        description: raw customers table from snowflake

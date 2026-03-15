@@ -1,0 +1,84 @@
+models:
+
+  - name: silver_customers
+    description: Cleaned customer entity table
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+          - unique
+
+      - name: email
+        tests:
+          - not_null
+
+      - name: pan_number
+        tests:
+          - not_null
+          - unique
+
+      - name: country
+        tests:
+          - accepted_values:
+              values: ['India', 'USA', 'United Kingdom', 'OTHER']
+
+
+  - name: silver_accounts
+    description: Cleaned accounts entity table
+    columns:
+      - name: account_id
+        tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('silver_customers')
+              field: customer_id
+
+      - name: balance
+        tests:
+          - not_null
+
+
+  - name: silver_cards
+    description: Cleaned cards entity table
+    columns:
+      - name: card_id
+        tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('silver_customers')
+              field: customer_id
+
+      - name: card_number
+        tests:
+          - not_null
+          - unique
+
+
+  - name: silver_transactions
+    description: Cleaned transactions entity table
+    columns:
+      - name: transaction_id
+        tests:
+          - not_null
+          - unique
+
+      - name: account_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('silver_accounts')
+              field: account_id
+
+      - name: amount
+        tests:
+          - not_null
