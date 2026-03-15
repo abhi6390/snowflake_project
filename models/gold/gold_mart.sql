@@ -1,7 +1,7 @@
 select
     at.*,
     ca.email,
-    coalesce(cp.number_of_cards, 0) as number_of_cards
+    COALESCE(cp.number_of_cards, 0) as number_of_cards
 from {{ ref('accounts_transactions') }} at
 
 join {{ ref('customers_accounts') }} ca
